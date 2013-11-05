@@ -1,0 +1,16 @@
+﻿.ts-progressbar-container {
+	border: 2px solid #ddd;
+	height: 40px;
+}
+
+.ts-progressbar-progress {
+	position: absolute;
+	top: 0; 
+	left: 0;
+	height: 100%;
+}
+
+.ts-progressbar-label {
+	margin: 0;
+	text-align: center;
+}
