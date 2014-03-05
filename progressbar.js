@@ -2,46 +2,48 @@
 	var container,
 		stretch,
 		progressBar,
-		label;
+		label,
+		height;
 
 	var color;
 	var round;
 	var finishedText;
 	var progress;
 
-	if (options.container == undefined || options.container == null || options.container.tagName !== 'DIV') {
+	if (options.container === undefined || options.container === null || options.container.tagName !== 'DIV') {
 		throw 'Progress bar requires a div be specified as the container.';
 	}
 	container = options.container;
 
-	if (options.color == undefined || typeof(options.color) != 'string') {
-		color = '#ffffff';
-	}
-	if (options.background == undefined || typeof(options.background) != 'string') {
-		background = '#333333';
-	}
+	(options.color === undefined || typeof(options.color) !== 'string') ?
+	color = '#ffffff' : color = options.color;
 
-	if (options.round == undefined || typeof(options.round) != 'number') {
-		round = 0;
-	}
+	(options.background === undefined || typeof(options.background) !== 'string') ?
+	background = '#333333' : background = options.background;
 
-	if (options.finishedText == undefined || typeof(options.finishedText) != 'string') {
-		finishedText = null;
-	}
+	(options.round === undefined || typeof(options.round) !== 'number') ?
+	round = 0 : round = options.round;
 
-	container.className = 'ts-progressbar-container';
+	(options.finishedText === undefined || typeof(options.finishedText) !== 'string') ?
+	finishedText = '100%' : finishedText = options.finishedText;
+
+	(options.height === undefined || typeof(options.height) !== 'number') ? 
+	height = 40 : height = options.height;
+
+	container.className = 'pb-container';
+	container.setAttribute('style', 'height:' + height + 'px');
 
 	stretch = document.createElement('div');
-	stretch.className = 'ts-progressbar-stretch';
+	stretch.className = 'pb-stretch';
 	stretch.setAttribute('style', 'position:relative;width:100%;height:100%;');
 	container.appendChild(stretch);
 
 	progressBar = document.createElement('div');
-	progressBar.className = 'ts-progressbar-progress';
+	progressBar.className = 'pb-progress';
 	progressBar.setAttribute('style', 'color: ' + color + '; background-color: ' + background + ';' + 'width: 0%;');
 
-	label = document.createElement('h3');
-	label.className = 'ts-progressbar-label';
+	label = document.createElement('p');
+	label.className = 'pb-label';
 
 	progressBar.appendChild(label);
 	stretch.appendChild(progressBar); 
@@ -77,7 +79,9 @@
 			label.innerHTML = text;
 			progressBar.setAttribute('style', 'color: ' + color + '; background-color: ' + background + ';' + 'width: ' + progress + '%;');
 			return progressBar;
-		}
+		},
+		height: height,
+		progress: progress
 	};
 
 	return self;
